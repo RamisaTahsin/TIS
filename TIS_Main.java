@@ -8,6 +8,10 @@ public class TIS_Main {
    System.out.println("\n       Welcome to our ticket machine!        ");
 
   }
+   public void printReceipt(){
+     System.out.println("Type" + type + "Age" + age + "Price" + price);
+   
+   }
   public static void main(String[] args) {
     Scanner scan = new Scanner(System.in);
 
