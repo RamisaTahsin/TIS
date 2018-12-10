@@ -4,8 +4,14 @@ import java.text.DecimalFormat;
 public class TIS_Main {
   static DecimalFormat precision = new DecimalFormat("#0.00");
 
-  private void printWelcome(){
+  private void printWelcome(TIS_Tickets[] ticketList){
+
    System.out.println("\n       Welcome to our ticket machine!        ");
+
+   for (int i=0; i < ticketList.length; i++){
+     System.out.println( (i+1) + " " + ticketList[i].getType() + " " +
+     ticketList[i].getAge() + " " + precision.format(ticketList[i].getPrice()) + " kr.");
+   }
 
   }
   public static void main(String[] args) {
@@ -20,6 +26,10 @@ public class TIS_Main {
         if(choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4") || choice.equals("5") || choice.equals("6"));
           break;
       }
+      //implementing the chosen ticket type
+
+      System.out.println(" Register accountnumber: ");
+      accountNr = scan.nextLine();
     }
-  }
+  } //main
 }
