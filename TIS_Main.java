@@ -2,51 +2,74 @@ import java.util.Scanner;
 import java.text.DecimalFormat;
 
 public class TIS_Main {
-  static DecimalFormat precision = new DecimalFormat("#0.00");
+  private static DecimalFormat precision = new DecimalFormat("#0.00");
 
-  private void printWelcome(){
-    System.out.println("\n       Welcome to our ticket machine!        ");
-
-  }
-  private void printActions(TIS_Tickets[] ticketList){
-    System.out.println("*   Select your ticket:            * ");
-    for (int i=0; i < ticketList.length; i++){
-      System.out.println( (i+1) + ". Add " + ticketList[i].getType() + " " +
-      ticketList[i].getAge() + " " + precision.format(ticketList[i].getPrice()) + " kr.");
-    }
-    System.out.println("6. Complete Purchase.    ");
-
-
-   for (int i=0; i < ticketList.length; i++){
-     System.out.println( (i+1) + " " + ticketList[i].getType() + " " +
-     ticketList[i].getAge() + " " + precision.format(ticketList[i].getPrice()) + " kr.");
-   }
-
-  }
-   public void printReceipt(){
-     System.out.println("Type" + type + "Age" + age + "Price" + price);
-   
-   }
   public static void main(String[] args) {
     TIS_Main main = new TIS_Main();
-    TIS_Tickets tickets = new TIS_Tickets();
     Scanner scan = new Scanner(System.in);
-    main.printActions(tickets.createTicket());
 
-    //scan.close();
+    main.printWelcome();
+
     while(true) {
-    String choice = "";
-    System.out.println("What ticket do you want to buy? \n1. Child \n2. Young Adult \n3. Adult \n4. Senior \n5. Family Ticket \n6. Cancel");
+      int choice;
 
+      main.printActions(TIS_Tickets.getTickets());
       while(true) {
-        choice = scan.nextLine();
-        if(choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4") || choice.equals("5") || choice.equals("6"));
-          break;
+        try{
+          choice = scan.nextInt();
+          scan.nextLine(); //remove newline
+
+          if(choice >= 1 && choice <= 6)
+            break;
+
+          System.out.println("  Invalid choice, try again.");
+        }
+        catch(Exception e){
+          System.out.println(scan.nextLine() + " is not valid choice.");
+        }
       }
+
+      if(choice == 6)
+        break;
+
       //implementing the chosen ticket type
+      TIS_Ticket chosenTicket = TIS_Tickets.getTickets()[choice -1];
+      System.out.println("  Chosen Ticket: " + chosenTicket.getType() + ", " + chosenTicket.getPrice() + " SEK");
 
       System.out.println(" Register accountnumber: ");
-      accountNr = scan.nextLine();
+      String accountNr = scan.nextLine();
+
+      accountNr = accountNr.replace("-", "").replace(" ", ""); //Remove all - and spaces from the accountNr
+
+
+      TIS_TransactionStatus result = TIS_Transaction.makeTransaction(accountNr, chosenTicket.getPrice());
+      if(result.getSuccessful()){
+        main.printReceipt(chosenTicket.getType(), chosenTicket.getPrice(), result.getBank());
+      } else {
+        System.out.println("Try again.");
+      }
     }
   } //main
+
+  private void printWelcome(){
+    System.out.println("\n    Welcome to our ticket machine!");
+
+  }
+  private void printActions(TIS_Ticket[] ticketList){
+    System.out.println("*   Select your ticket:   *");
+    for (int i=0; i < ticketList.length; i++){
+      System.out.println( (i+1) + ". Add " + ticketList[i].getType() + " " +
+      ticketList[i].getAge() + " " + precision.format(ticketList[i].getPrice()) + " SEK.");
+    }
+    System.out.println("6. Exit ticket machine.    ");
+
+  }
+   public void printReceipt(String type, double price, String bank){
+     System.out.println("===== Recepipt======");
+     System.out.println("Ticket: " + type);
+     System.out.println("Price:  " + price);
+     System.out.println("Bank:   " + bank);
+     System.out.println("====================");
+   }
+
 }
