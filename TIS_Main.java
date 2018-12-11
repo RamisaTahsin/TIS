@@ -51,6 +51,14 @@ public class TIS_Main {
     }
   } //main
 
+  //methods for TIS_Main_Test 
+  public String setAccountNr(String accountNr){
+     //print
+     accountNr.replace("-", "").replace(" ", "");
+     //print
+     return accountNr;
+}
+
   private void printWelcome(){
     System.out.println("\n Welcome to our ticket machine!");
 
