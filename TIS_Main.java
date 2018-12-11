@@ -29,17 +29,18 @@ public class TIS_Main {
         }
       }
 
+
+
       if(choice == 6)
         break;
 
       //implementing the chosen ticket type
       TIS_Ticket chosenTicket = TIS_Tickets.getTickets()[choice -1];
-      System.out.println(" Chosen Ticket: " + chosenTicket.getType() + " " + precision.format(chosenTicket.getPrice()) + " SEK");
+      System.out.println("  Chosen Ticket: " + chosenTicket.getType() + ", " + precision.format(chosenTicket.getPrice()) + " SEK");
 
       System.out.println(" Register accountnumber: ");
       String accountNr = scan.nextLine();
-
-      accountNr = accountNr.replace("-", "").replace(" ", ""); //Remove all - and spaces from the accountNr
+      accountNr = main.setAccountNr(accountNr); //Remove all - and spaces from the accountNr
 
 
       TIS_TransactionStatus result = TIS_Transaction.makeTransaction(accountNr, chosenTicket.getPrice());
@@ -51,26 +52,33 @@ public class TIS_Main {
     }
   } //main
 
+  //methods for TIS_Main_Test
+  public String setAccountNr(String accountNr){
+     //print
+     accountNr.replace("-", "").replace(" ", "");
+     //print
+     return accountNr;
+  }
+
   private void printWelcome(){
-    System.out.println("\n Welcome to our ticket machine!");
+    System.out.println("\n    Welcome to our ticket machine!");
 
   }
   private void printActions(TIS_Ticket[] ticketList){
-    System.out.println("*     Select your ticket:     *");
-    System.out.println("===============================");
+    System.out.println("*   Select your ticket:   *");
     for (int i=0; i < ticketList.length; i++){
-      System.out.println( (i+1) + ". Select " + ticketList[i].getType() + " Ticket, " +
-      ticketList[i].getAge() + ". Price: " + precision.format(ticketList[i].getPrice()) + " SEK.");
+      System.out.println( (i+1) + ". Add " + ticketList[i].getType() + " " +
+      ticketList[i].getAge() + " " + precision.format(ticketList[i].getPrice()) + " SEK.");
     }
     System.out.println("6. Exit ticket machine.    ");
 
   }
    public void printReceipt(String type, double price, String bank){
-     System.out.println("\n===== Recepipt ======");
+     System.out.println("===== Recepipt======");
      System.out.println("Ticket: " + type);
      System.out.println("Price:  " + precision.format(price) + " SEK");
      System.out.println("Bank:   " + bank);
-     System.out.println("=====================\n");
+     System.out.println("====================");
    }
 
 }
