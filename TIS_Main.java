@@ -22,7 +22,7 @@ public class TIS_Main {
           if(choice >= 1 && choice <= 6)
             break;
 
-          System.out.println("  Invalid choice, try again.");
+          System.out.println("Invalid choice, try again.");
         }
         catch(Exception e){
           System.out.println(scan.nextLine() + " is not valid choice.");
@@ -34,9 +34,9 @@ public class TIS_Main {
 
       //implementing the chosen ticket type
       TIS_Ticket chosenTicket = TIS_Tickets.getTickets()[choice -1];
-      System.out.println("  Chosen Ticket: " + chosenTicket.getType() + ", " + chosenTicket.getPrice() + " SEK");
+      System.out.println("Chosen Ticket: " + chosenTicket.getType() + ", " + chosenTicket.getPrice() + " SEK");
 
-      System.out.println(" Register accountnumber: ");
+      System.out.println("Register accountnumber: ");
       String accountNr = scan.nextLine();
 
       accountNr = accountNr.replace("-", "").replace(" ", ""); //Remove all - and spaces from the accountNr
@@ -46,20 +46,21 @@ public class TIS_Main {
       if(result.getSuccessful()){
         main.printReceipt(chosenTicket.getType(), chosenTicket.getPrice(), result.getBank());
       } else {
-        System.out.println("Try again.");
+        System.out.println("  Try again.");
       }
     }
   } //main
 
   private void printWelcome(){
-    System.out.println("\n    Welcome to our ticket machine!");
+    System.out.println("\n Welcome to our ticket machine!");
 
   }
   private void printActions(TIS_Ticket[] ticketList){
-    System.out.println("*   Select your ticket:   *");
+    System.out.println("*     Select your ticket:     *");
+    System.out.println("===============================");
     for (int i=0; i < ticketList.length; i++){
-      System.out.println( (i+1) + ". Add " + ticketList[i].getType() + " " +
-      ticketList[i].getAge() + " " + precision.format(ticketList[i].getPrice()) + " SEK.");
+      System.out.println( (i+1) + ". Select " + ticketList[i].getType() + " Ticket, " +
+      ticketList[i].getAge() + ". Price: " + precision.format(ticketList[i].getPrice()) + " SEK.");
     }
     System.out.println("6. Exit ticket machine.    ");
 
