@@ -67,7 +67,7 @@ public class TIS_Main {
    public void printReceipt(String type, double price, String bank){
      System.out.println("===== Recepipt======");
      System.out.println("Ticket: " + type);
-     System.out.println("Price:  " + price);
+     System.out.println("Price:  " + precision.format(price) + " SEK");
      System.out.println("Bank:   " + bank);
      System.out.println("====================");
    }
