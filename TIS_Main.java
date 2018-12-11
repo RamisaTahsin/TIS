@@ -34,7 +34,7 @@ public class TIS_Main {
 
       //implementing the chosen ticket type
       TIS_Ticket chosenTicket = TIS_Tickets.getTickets()[choice -1];
-      System.out.println("  Chosen Ticket: " + chosenTicket.getType() + ", " + chosenTicket.getPrice() + " SEK");
+      System.out.println("  Chosen Ticket: " + chosenTicket.getType() + ", " + precision.format(chosenTicket.getPrice()) + " SEK");
 
       System.out.println(" Register accountnumber: ");
       String accountNr = scan.nextLine();
