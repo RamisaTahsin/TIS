@@ -41,7 +41,7 @@ public class TIS_Main {
       String accountNr = scan.nextLine();
 
       //Remove all - and spaces from the accountNr
-      accountNr = accountNr.replace("-", "").replace(" ", "");
+      accountNr = main.setAccountNr(accountNr);
 
       TIS_TransactionStatus result = TIS_Transaction.
                             makeTransaction(accountNr, chosenTicket.getPrice());
@@ -56,10 +56,8 @@ public class TIS_Main {
 
   //methods for TIS_Main_Test
   public String setAccountNr(String accountNr){
-    //print
-    accountNr.replace("-", "").replace(" ", "");
-    //print
-    return accountNr;
+    String result = accountNr.replace("-", "").replace(" ", "");
+    return result;
   }
 
   private void printWelcome(){
