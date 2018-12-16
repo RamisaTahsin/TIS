@@ -1,7 +1,10 @@
 public class TIS_Transaction {
 
+//Calls upon the constructor in MHS_Main.
+//public static MHS_Main talkToBank = new MHS_Main();
+
   public static TIS_TransactionStatus  makeTransaction(String accountNr, double price){
-    //String result = MHS_Main.purchaseTicket(accountNr, price);
+    //String result = talkToBank.purchaseTicket(accountNr, ticketPrice);
     String result = "SEB"; //So we can run the program while we wait.
 
     if(result.equals("Wrong accountNr")){

@@ -1,5 +1,6 @@
 public class TIS_Tickets {
 
+  //The list of all of our tickets, with their attributes.
   public static TIS_Ticket[] getTickets(){
     TIS_Ticket[] ticketList = {
       new TIS_Ticket("Child", "Between 1-10 years", 10.00),
