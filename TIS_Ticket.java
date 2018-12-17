@@ -3,6 +3,7 @@ public class TIS_Ticket{
   private String age;
   private double price;
 
+  //Defines single ticket.
   public TIS_Ticket(String type, String age, double price){
     this.type = type;
     this.age = age;

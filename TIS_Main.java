@@ -4,6 +4,39 @@ import java.text.DecimalFormat;
 public class TIS_Main {
   private static DecimalFormat precision = new DecimalFormat("#0.00");
 
+  //Methods for TIS_Main_Test.
+  public String setAccountNr(String accountNr){
+    String result = accountNr.replace("-", "").replace(" ", "");
+    return result;
+  }
+
+  private void printWelcome(){
+    System.out.println("\n Welcome to our ticket machine!");
+
+  }
+
+  private void printActions(TIS_Ticket[] ticketList){
+    System.out.println("*     Select your ticket:     *");
+    System.out.println("===============================");
+    for (int i=0; i < ticketList.length; i++){
+      System.out.println((i+1) + ". Select " + ticketList[i].getType() +
+                        " Ticket, " + ticketList[i].getAge() + ". Price: " +
+                        precision.format(ticketList[i].getPrice()) + " SEK.");
+    }
+    System.out.println("6. Exit ticket machine.    ");
+
+  }
+
+  public void printReceipt(String type, double price, String bank){
+    System.out.println("\n===== Recepipt ======");
+    System.out.println("Ticket: " + type);
+    System.out.println("Price:  " + precision.format(price) + " SEK");
+    System.out.println("Bank:   " + bank);
+    System.out.println("=====================\n");
+  }
+
+
+
   public static void main(String[] args) {
     TIS_Main main = new TIS_Main();
     Scanner scan = new Scanner(System.in);
@@ -17,7 +50,7 @@ public class TIS_Main {
       while(true) {
         try{
           choice = scan.nextInt();
-          scan.nextLine(); //remove newline
+          scan.nextLine(); //Remove newline.
 
           if(choice >= 1 && choice <= 6)
             break;
@@ -29,10 +62,11 @@ public class TIS_Main {
         }
       }
 
+      //If user chose to cancel program.
       if(choice == 6)
         break;
 
-      //implementing the chosen ticket type
+      //Implementing the chosen ticket type.
       TIS_Ticket chosenTicket = TIS_Tickets.getTickets()[choice -1];
       System.out.println(" Chosen Ticket: " + chosenTicket.getType() + " " +
        precision.format(chosenTicket.getPrice()) + " SEK");
@@ -40,7 +74,7 @@ public class TIS_Main {
       System.out.println(" Register accountnumber: ");
       String accountNr = scan.nextLine();
 
-      //Remove all - and spaces from the accountNr
+      //Remove all - and spaces from the accountNr.
       accountNr = main.setAccountNr(accountNr);
 
       TIS_TransactionStatus result = TIS_Transaction.
@@ -52,34 +86,5 @@ public class TIS_Main {
         System.out.println("Try again.");
       }
     }
-  }
-
-  //methods for TIS_Main_Test
-  public String setAccountNr(String accountNr){
-    String result = accountNr.replace("-", "").replace(" ", "");
-    return result;
-  }
-
-  private void printWelcome(){
-    System.out.println("\n Welcome to our ticket machine!");
-
-  }
-  private void printActions(TIS_Ticket[] ticketList){
-    System.out.println("*     Select your ticket:     *");
-    System.out.println("===============================");
-    for (int i=0; i < ticketList.length; i++){
-      System.out.println((i+1) + ". Select " + ticketList[i].getType() +
-                        " Ticket, " + ticketList[i].getAge() + ". Price: " +
-                        precision.format(ticketList[i].getPrice()) + " SEK.");
-    }
-    System.out.println("6. Exit ticket machine.    ");
-
-  }
-  public void printReceipt(String type, double price, String bank){
-    System.out.println("\n===== Recepipt ======");
-    System.out.println("Ticket: " + type);
-    System.out.println("Price:  " + precision.format(price) + " SEK");
-    System.out.println("Bank:   " + bank);
-    System.out.println("=====================\n");
-  }
-}
+  } //main
+} //class
